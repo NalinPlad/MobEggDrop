@@ -11,9 +11,17 @@ public final class MobEggDrop extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-
-        getServer().getConsoleSender().sendMessage("MobEggDrop Plugin Version 1.0");
-        getServer().getConsoleSender().sendMessage("MobEggDrop Plugin Starting...");
+        ItemStack spawner = new ItemStack(Material.SPAWNER);
+		@SuppressWarnings("deprecation")
+		ShapedRecipe SPWN = new ShapedRecipe(spawner);
+    	SPWN.shape("BBB","BEB","BBB");
+    	
+    	SPWN.setIngredient('E', Material.ENDER_EYE);
+    	SPWN.setIngredient('B', Material.CHAIN);
+    	getServer().addRecipe(SPWN);
+        
+        getServer().getConsoleSender().sendMessage("Spawners+ Version 1.16");
+        getServer().getConsoleSender().sendMessage("Spawners+ Starting...");
 
         loadConfig();
 
@@ -25,7 +33,7 @@ public final class MobEggDrop extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getServer().getConsoleSender().sendMessage("MobEggDrop Plugin Stopping...");
+        getServer().getConsoleSender().sendMessage("Spawners+ Stopping...");
     }
 
 
@@ -34,7 +42,7 @@ public final class MobEggDrop extends JavaPlugin {
         for (Material key : Material.values()){
             String key_string = key.toString();
             if(!key_string.startsWith("LEGACY_") && key_string.endsWith("_SPAWN_EGG")){
-                config.addDefault(key_string.replace("_SPAWN_EGG",""), 2.5);
+                config.addDefault(key_string.replace("_SPAWN_EGG",""), 5);
             }
         }
 
